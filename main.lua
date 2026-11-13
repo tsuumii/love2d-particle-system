@@ -234,25 +234,25 @@ function love.load()
 
     -- FLASH + EXPLOSION (14.5s - 16.0s)
 
-    cyan_flash_settings = makeSettings()
-    cyan_flash_settings.min_life = 0.12
-    cyan_flash_settings.max_life = 0.12
-    cyan_flash_settings.size = { key(0, 45), key(1, 45) }
-    cyan_flash_settings.transparency = { key(0, 0), key(1, 0) }
-    cyan_flash_settings.color = { colorKey(0, 0.4, 1, 1), colorKey(1, 0.4, 1, 1) }
+    white_flash_settings = makeSettings()
+    white_flash_settings.min_life = 0.12
+    white_flash_settings.max_life = 0.12
+    white_flash_settings.size = { key(0, 45), key(1, 45) }
+    white_flash_settings.transparency = { key(0, 0), key(0.3, 0.1), key(0.6, 0.4), key(1, 1) }
+    white_flash_settings.color = { colorKey(0, 1, 1, 1), colorKey(1, 1, 1, 1) }
 
     red_screen_settings = makeSettings()
     red_screen_settings.min_life = 1.5
     red_screen_settings.max_life = 1.5
     red_screen_settings.size = { key(0, 45), key(1, 45) }
-    red_screen_settings.transparency = { key(0, 0), key(0.3, 0.6), key(1, 1) }
+    red_screen_settings.transparency = { key(0, 0), key(0.1, 0.15), key(0.3, 0.6), key(0.6, 0.85), key(1, 1) }
     red_screen_settings.color = { colorKey(0, 0.45, 0, 0), colorKey(1, 0.2, 0, 0) }
 
     pythios_flash_settings = makeSettings()
     pythios_flash_settings.min_life = 0.6
     pythios_flash_settings.max_life = 0.6
-    pythios_flash_settings.size = { key(0, 0.45), key(1, 0.5) }
-    pythios_flash_settings.transparency = { key(0, 0), key(0.6, 0.2), key(1, 1) }
+    pythios_flash_settings.size = { key(0, 0.45), key(0.5, 0.49), key(1, 0.5) }
+    pythios_flash_settings.transparency = { key(0, 0), key(0.4, 0.05), key(0.6, 0.2), key(0.8, 0.5), key(1, 1) }
     pythios_flash_settings.color = red
 
     ritual_settings = makeSettings()
@@ -260,8 +260,10 @@ function love.load()
     ritual_settings.max_life = 1.3
     ritual_settings.min_rotation_speed = 0.8
     ritual_settings.max_rotation_speed = 0.8
-    ritual_settings.size = { key(0, 0.35), key(1, 0.5) }
-    ritual_settings.transparency = { key(0, 1), key(0.2, 0.1), key(0.7, 0.3), key(1, 1) }
+    ritual_settings.size = { key(0, 0.3), key(0.15, 0.42), key(0.4, 0.47), key(1, 0.5) }
+    ritual_settings.transparency = {
+        key(0, 1), key(0.08, 0.5), key(0.2, 0.1), key(0.6, 0.2), key(0.8, 0.5), key(1, 1)
+    }
     ritual_settings.color = red
 
     explode_fog_settings = makeSettings()
@@ -278,8 +280,12 @@ function love.load()
     explode_fog_settings.max_rotation = math.pi * 2
     explode_fog_settings.min_rotation_speed = -0.5
     explode_fog_settings.max_rotation_speed = 0.5
-    explode_fog_settings.size = { key(0, 0.2, 0.05), key(1, 0.9, 0.2) }
-    explode_fog_settings.transparency = { key(0, 1), key(0.15, 0.3), key(1, 1) }
+    explode_fog_settings.size = {
+        key(0, 0.2, 0.05), key(0.15, 0.55, 0.1), key(0.4, 0.78, 0.15), key(1, 0.9, 0.2)
+    }
+    explode_fog_settings.transparency = {
+        key(0, 1), key(0.05, 0.6), key(0.15, 0.3), key(0.6, 0.5), key(0.85, 0.8), key(1, 1)
+    }
     explode_fog_settings.color = { colorKey(0, 1, 0.1, 0.1), colorKey(1, 0.6, 0, 0) }
 
     -- RING (16.0s - 17.6s)
@@ -287,8 +293,10 @@ function love.load()
     big_ring_settings = makeSettings()
     big_ring_settings.min_life = 1.6
     big_ring_settings.max_life = 1.6
-    big_ring_settings.size = { key(0, 1.1), key(1, 2) }
-    big_ring_settings.transparency = { key(0, 0), key(0.6, 0.3), key(1, 1) }
+    big_ring_settings.size = { key(0, 1.1), key(0.2, 1.5), key(0.5, 1.8), key(1, 2) }
+    big_ring_settings.transparency = {
+        key(0, 0.6), key(0.05, 0.1), key(0.3, 0.1), key(0.6, 0.35), key(0.85, 0.7), key(1, 1)
+    }
     big_ring_settings.color = red
 
     ring_fog_settings = makeSettings()
@@ -499,11 +507,6 @@ function love.load()
         colorKey(0.4, 0.6, 0, 0),
         colorKey(1, 0.15, 0, 0)
     }
-
-    -----------------------------------------------------------------
-    -- EXTRA EFFECTS (freestyle, not in the original video)
-    -- theme: midnight, a clock, and a bell striking
-    -----------------------------------------------------------------
 
     -- OPENING (0s - 4s): a dim clock ticking in the dark
 
@@ -930,7 +933,7 @@ function love.load()
     red_glare = particleVfx.newObject("assets/Glare.png", red_glare_settings)
     burst_fog = particleVfx.newObject("assets/fog.png", burst_fog_settings)
     burst_stars = particleVfx.newObject("assets/star.png", burst_stars_settings)
-    cyan_flash = particleVfx.newObject("assets/square.png", cyan_flash_settings)
+    white_flash = particleVfx.newObject("assets/square.png", white_flash_settings)
     red_screen = particleVfx.newObject("assets/square.png", red_screen_settings)
     pythios_flash = particleVfx.newObject("assets/Pythios.png", pythios_flash_settings)
     ritual = particleVfx.newObject("assets/Ritual.png", ritual_settings)
@@ -1005,7 +1008,7 @@ function love.load()
         sigil_glow, sigil_halo, sigil, sigil_fill,
         heart_glow, heart_pulse,
         cloud_glyph, runes, cloud_halo, cloud, swirl, center_line, center_moon,
-        final_flash, final_shine, final_cracks, final_shards, cyan_flash
+        final_flash, final_shine, final_cracks, final_shards, white_flash
     }
 
     for i = 1, #top_objects do
@@ -1057,14 +1060,14 @@ function love.load()
     moon_jp = "夜空には満月が浮かんでいた"
     bell_jp = "地獄の鐘が真夜中に合わせて鳴り響く"
 
-    -- big 赤 (red) on the left and 月 (moon) on the right, half off screen,
+    -- big 赤 (red) on the left and 月 (moon) on the right, fully on screen,
     -- slowly sliding toward the moon
     red_moon_alpha = {
         key(10.4, 0), key(10.7, 0.25), key(11.0, 0.45), key(11.2, 0.5),
         key(12.0, 0.5), key(12.2, 0.3), key(12.4, 0.1), key(12.5, 0)
     }
-    red_kanji_x = { key(10.4, -90), key(11.0, -60), key(11.6, -45), key(12.5, -35) }
-    moon_kanji_x = { key(10.4, 720), key(11.0, 690), key(11.6, 675), key(12.5, 665) }
+    red_kanji_x = { key(10.4, 20), key(11.0, 50), key(11.6, 65), key(12.5, 75) }
+    moon_kanji_x = { key(10.4, 610), key(11.0, 580), key(11.6, 565), key(12.5, 555) }
 
     -- "you have been chosen", spaced out over the moon emblem
     chosen_jp = "貴 方 は 選 ば れ ま し た"
@@ -1128,7 +1131,7 @@ function love.update(dt)
         effect_stage = 2
     elseif effect_stage == 2 and effect_time >= 14.5 then
         -- flash, then the red explosion
-        particleVfx.emit(cyan_flash)
+        particleVfx.emit(white_flash)
         particleVfx.emit(red_screen)
         particleVfx.emit(pythios_flash)
         particleVfx.emit(ritual)
